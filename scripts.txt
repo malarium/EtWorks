@@ -1,0 +1,44 @@
+//Countdown clock script:
+const countDownDate = new Date("Jan 31, 2018 23:23:59").getTime(); //final date
+
+const x = setInterval(function() {
+  let now = new Date().getTime();
+  let distance = countDownDate - now;
+  let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  document.getElementById("days").innerHTML = days + "d";
+  document.getElementById("hours").innerHTML = hours + "h";
+  document.getElementById("mins").innerHTML = minutes + "m";
+  document.getElementById("secs").innerHTML = seconds + "s";
+
+  if (distance < 0) { //when countdown done
+    clearInterval(x);
+    document.getElementById("days").innerHTML = "ALL";
+    document.getElementById("hours").innerHTML = "NOW";
+    document.getElementById("mins").innerHTML = "IS";
+    document.getElementById("secs").innerHTML = "DONE";
+  }
+}, 1000);
+
+$(document).ready(function() { //wyłączanie dźwiku po wyjściu z okna modalnego
+  $("#video-modal").on('hidden.bs.modal', function (e) {
+    $("#video-modal iframe").attr("src", $("#video-modal iframe").attr("src"));
+  });
+
+  //płynne przewijanie strony - kod uniwersalny dla tagów <a>
+  $('a[href*="#"]:not([href="#"])').click(function() {
+    if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
+      var target = $(this.hash);
+      target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+      if (target.length) {
+        $('html, body').animate({
+          scrollTop: target.offset().top
+        }, 750);
+        return false;
+      }
+    }
+  });
+});
