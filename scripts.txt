@@ -1,5 +1,5 @@
 //Countdown clock script:
-const countDownDate = new Date("Jan 31, 2018 23:23:59").getTime(); //final date
+const countDownDate = new Date("Mar 31, 2018 23:23:59").getTime(); //final date
 
 const x = setInterval(function() {
   let now = new Date().getTime();
